@@ -32,6 +32,14 @@
         const audio = document.getElementById('lovelyAudio');
         audio.play().catch(e => console.log("Ждем клика для музыки..."));
     });
+    window.addEventListener('DOMContentLoaded', () => {
+    const bg = document.querySelector('.lyrics-bg');
+    if (bg) {
+        const words = "COME HERE TOUCH ME KISS ME TOUCH ME NOW REACH OUT AND TOUCH FAITH ENJOY THE SILENCE NEVER LET ME DOWN AGAIN I FEEL YOU LOVELY TIMES JANITOR OF LUNACY WORDS ARE VERY UNNECESSARY ";
+        // Повторяем строку 200 раз, чтобы точно забить весь экран любого размера
+        bg.innerText = words.repeat(200); 
+    }
+});
 </script>
 </body>
 </html>
