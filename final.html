@@ -15,9 +15,24 @@
         <p style="font-size: 0.6rem; margin-top: 50px;">Janitor of Lunacy active. System locked.</p>
     </div>
     
-    <audio autoplay loop>
-        <source src="Janitor_Of_Lunacy_Lovely_Times.mp3" type="audio/mpeg">
-    </audio>
-    <script src="music.js"></script>
+   <audio id="lovelyAudio" loop>
+    <source src="lovely_times.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+    // Как только пользователь кликнет в любое место экрана - музыка пойдет
+    document.addEventListener('click', function() {
+        const audio = document.getElementById('lovelyAudio');
+        audio.play().catch(function(error) {
+            console.log("Ошибка воспроизведения:", error);
+        });
+    }, { once: true }); // Сработает один раз
+
+    // Дополнительно: пробуем запустить при загрузке (на случай, если она уже кликала в меню)
+    window.addEventListener('load', function() {
+        const audio = document.getElementById('lovelyAudio');
+        audio.play().catch(e => console.log("Ждем клика для музыки..."));
+    });
+</script>
 </body>
 </html>
