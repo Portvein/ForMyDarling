@@ -1,240 +1,26 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TERMINAL_LIZA_LOVELY_TIMES</title>
-    <style>
-        :root {
-            --bg: #050505;
-            --accent: #800020; 
-            --text: #d1d1d1;
-            --gray: #1a1a1a;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Courier New', Courier, monospace;
-            margin: 0;
-            overflow: hidden;
-            height: 100vh;
-        }
-
-        /* Тексты Depeche Mode на фоне */
-        .lyrics-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.02); /* Почти невидимый */
-            pointer-events: none;
-            user-select: none;
-            white-space: pre-wrap;
-            padding: 5px;
-            text-transform: uppercase;
-        }
-
-        .container {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            text-align: center;
-            height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-        }
-
-        .header-glitch {
-            font-size: 1.8rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-        }
-
-        .medical-frame {
-            border: 1px solid var(--gray);
-            padding: 15px;
-            background: rgba(0,0,0,0.9);
-            margin-bottom: 20px;
-        }
-
-        .photo-placeholder {
-            width: 100%;
-            max-height: 350px;
-            object-fit: contain;
-            border: 1px solid var(--accent);
-            filter: grayscale(1) sepia(0.2);
-        }
-
-        .nav-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            background: none;
-            cursor: pointer;
-            font-family: inherit;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            background: var(--accent);
-            color: white;
-            box-shadow: 0 0 10px var(--accent);
-        }
-
-        .hidden { display: none; }
-
-        input {
-            background: transparent;
-            border: 1px solid var(--accent);
-            color: white;
-            padding: 10px;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        #final-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-        }
-
-        .blink { animation: blinker 1.5s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0; } }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<div class="lyrics-bg" id="bg-text"></div>
-
-<div class="container">
-    <div id="screen-auth">
-        <div class="header-glitch">IDENTIFICATION_REQUIRED</div>
-        <p>КТО ТУТ ГАРАЖНАЯ КОРОЛЕВА?</p>
-        <input type="text" id="pass-input" placeholder="...">
-        <br>
-        <button class="btn" onclick="startSystem()">ДЕШИФРОВАТЬ</button>
+    <div class="container">
+        <div class="header">LIZA_DATABASE_LOGIN</div>
+        <p>ВВЕДИТЕ ИМЯ ГАРАЖНОЙ КОРОЛЕВЫ:</p>
+        <input type="text" id="pass" style="background:transparent; border:1px solid var(--accent); color:white; padding:10px; text-align:center;">
+        <br><br>
+        <button class="btn" onclick="check()">ВОЙТИ</button>
     </div>
 
-    <div id="screen-menu" class="hidden">
-        <div class="header-glitch">MAIN_DATABASE</div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-            <button class="btn" onclick="showSection('adik')">Адик</button>
-            <button class="btn" onclick="showSection('lusya')">Люся</button>
-            <button class="btn" onclick="showSection('me')">Твой Унтерменш</button>
-            <button class="btn" onclick="showSection('pipa')">Пипа</button>
-        </div>
-        
-        <div style="margin-top: 50px;">
-            <p style="font-size: 0.9rem; color: #666;">Я с тобой до последнего. Ты со мной?</p>
-            <button class="btn" onclick="confirmFinal()">ЗД (ДА)</button>
-        </div>
-    </div>
-
-    <div id="screen-view" class="hidden">
-        <div class="header-glitch" id="view-title">ОБЪЕКТ</div>
-        <div class="medical-frame">
-            <img id="view-img" src="" class="photo-placeholder">
-            <p id="view-desc" style="font-size: 0.8rem; margin-top: 15px;"></p>
-        </div>
-        <div class="nav-buttons">
-            <button class="btn" onclick="nav('back')"><</button>
-            <button class="btn" onclick="showSection('menu')">МЕНЮ</button>
-            <button class="btn" onclick="nav('next')">></button>
-        </div>
-    </div>
-
-    <div id="screen-final" class="hidden" style="background: #000; position: fixed; top:0; left:0; width:100%; height:100%; z-index:1000; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <div class="header-glitch" style="color: #fff;">PROTOCOL_ACCEPTED</div>
-        <p class="blink" style="color: var(--accent);">LOVELY TIMES FOREVER</p>
-        <p style="max-width: 400px; font-size: 0.8rem; line-height: 1.5;">
-            Система заблокирована. <br>
-            Армянский диктатор и её Унтерменш <br>
-            ушли в андеграунд до особого распоряжения. <br><br>
-            P.S. Балтика 9 ждет в холодильнике (возможно).
-        </p>
-        <button class="btn" onclick="location.reload()" style="margin-top: 20px; font-size: 0.6rem;">Перезагрузить систему</button>
-    </div>
-</div>
-
-<audio id="bg-music" loop>
-    <source src="lovely_times.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-    const sections = ['adik', 'lusya', 'me', 'pipa'];
-    let currentIdx = 0;
-
-    // ТУТ МЕНЯЙ ТЕКСТЫ ПОД ФОТО
-    const content = {
-        adik: { title: 'АДИК', desc: 'Верховный главнокомандующий кусями.', img: 'adik.jpg' },
-        lusya: { title: 'ЛЮСЯ', desc: '3 дня в гаражах — и вечность в основе.', img: 'lusya.jpg' },
-        me: { title: 'ТВОЙ УНТЕРМЕНШ', desc: 'Твой личный политический коллапс.', img: 'me.jpg' },
-        pipa: { title: 'ПИПА', desc: 'Чихуахуа-ярость. Концентрированное зло.', img: 'pipa.jpg' }
-    };
-
-    // Генерация фона из Depeche Mode
-    const dm = "Come here touch me kiss me touch me now Reach out and touch faith Enjoy the silence Never let me down again I feel you Lovely times Janitor of lunacy Words are very unnecessary ";
-    document.getElementById('bg-text').innerText = dm.repeat(60);
-
-    function startSystem() {
-        const p = document.getElementById('pass-input').value.toLowerCase();
-        if(p.includes('люся')) {
-            document.getElementById('screen-auth').classList.add('hidden');
-            document.getElementById('screen-menu').classList.remove('hidden');
-            document.getElementById('bg-music').play();
-        } else {
-            alert('ОШИБКА ДОСТУПА. Попробуй еще раз.');
+    <script>
+        function check() {
+            const p = document.getElementById('pass').value.toLowerCase();
+            if(p.includes('люся')) {
+                window.location.href = 'menu.html';
+            } else {
+                alert('ДОСТУП ЗАПРЕЩЕН. ПРОВЕРЬТЕ ТУБЕРКУЛЕЗИКОВ.');
+            }
         }
-    }
-
-    function showSection(name) {
-        if(name === 'menu') {
-            document.getElementById('screen-view').classList.add('hidden');
-            document.getElementById('screen-menu').classList.remove('hidden');
-            return;
-        }
-        currentIdx = sections.indexOf(name);
-        updateView();
-        document.getElementById('screen-menu').classList.add('hidden');
-        document.getElementById('screen-view').classList.remove('hidden');
-    }
-
-    function updateView() {
-        const key = sections[currentIdx];
-        document.getElementById('view-title').innerText = content[key].title;
-        document.getElementById('view-desc').innerText = content[key].desc;
-        document.getElementById('view-img').src = content[key].img;
-    }
-
-    function nav(dir) {
-        if(dir === 'next') currentIdx = (currentIdx + 1) % sections.length;
-        else currentIdx = (currentIdx - 1 + sections.length) % sections.length;
-        updateView();
-    }
-
-    function confirmFinal() {
-        document.getElementById('screen-menu').classList.add('hidden');
-        document.getElementById('screen-final').style.display = 'flex';
-    }
-</script>
-
+    </script>
 </body>
 </html>
