@@ -30,6 +30,23 @@ body::before {
     word-break: break-all;
     line-height: 1.5;
     text-transform: uppercase;
+    .lyrics-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Чтобы текст был ПОД контентом */
+    font-size: 10px; /* Делаем текст мельче, чтобы его влезло больше */
+    color: rgba(255, 255, 255, 0.03); /* Очень тусклый белый, почти прозрачный */
+    pointer-events: none;
+    user-select: none;
+    overflow: hidden;
+    line-height: 1.2;
+    word-break: break-all;
+    text-transform: uppercase;
+    text-align: justify;
+}
 }
 
 .container {
