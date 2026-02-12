@@ -2,123 +2,220 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>TERMINAL_LIZA_14</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TERMINAL_LIZA_LOVELY_TIMES</title>
     <style>
+        :root {
+            --bg: #050505;
+            --accent: #800020; 
+            --text: #d1d1d1;
+            --gray: #222;
+        }
+
         body {
-            background-color: #000;
-            color: #fff;
+            background-color: var(--bg);
+            color: var(--text);
             font-family: 'Courier New', Courier, monospace;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 50px 20px;
             margin: 0;
             overflow-x: hidden;
+            height: 100vh;
         }
-        .glitch {
-            font-size: 3rem;
-            font-weight: bold;
+
+        /* Фоновые фразы Depeche Mode */
+        .lyrics-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.03); /* Очень тускло */
+            pointer-events: none;
+            user-select: none;
+            line-height: 1.8;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .header-glitch {
+            font-size: 2.2rem;
+            color: var(--accent);
             text-transform: uppercase;
-            position: relative;
-            text-shadow: 0.05em 0 0 rgba(255,0,0,.75), -0.025em -0.05em 0 rgba(0,255,0,.75), 0.025em 0.05em 0 rgba(0,0,255,.75);
-            animation: glitch 500ms infinite;
+            border-bottom: 1px solid var(--accent);
+            margin-bottom: 30px;
         }
-        @keyframes glitch {
-            0% { transform: translate(0) }
-            20% { transform: translate(-3px, 3px) }
-            40% { transform: translate(-3px, -3px) }
-            60% { transform: translate(3px, 3px) }
-            80% { transform: translate(3px, -3px) }
-            100% { transform: translate(0) }
-        }
-        .unknown-pleasures {
-            margin: 40px 0;
-            width: 300px;
-            opacity: 0.8;
-            filter: invert(1);
-        }
-        .content-block {
-            max-width: 600px;
-            border-left: 2px solid #800020; /* Бордовый акцент */
-            padding-left: 20px;
-            margin-bottom: 50px;
-        }
-        .medical-report {
-            background: #111;
+
+        .medical-frame {
+            border: 2px solid var(--gray);
             padding: 20px;
-            border: 1px solid #333;
-            font-size: 0.9rem;
+            background: rgba(0,0,0,0.8);
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
+
+        .photo-placeholder {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border: 1px solid var(--accent);
+            filter: grayscale(1) contrast(1.2);
+            margin-bottom: 15px;
+        }
+
+        .nav-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
         .btn {
-            background: transparent;
-            color: #800020;
-            border: 1px solid #800020;
-            padding: 10px 20px;
+            padding: 10px 15px;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            background: none;
             cursor: pointer;
-            text-decoration: none;
-            transition: 0.3s;
+            font-family: inherit;
+            text-transform: uppercase;
+            font-size: 0.8rem;
         }
+
         .btn:hover {
-            background: #800020;
+            background: var(--accent);
             color: white;
         }
+
+        .hidden { display: none; }
+
         input {
-            background: #000;
-            border: 1px solid #333;
-            color: #fff;
+            background: transparent;
+            border: 1px solid var(--gray);
+            color: white;
             padding: 10px;
-            margin-top: 10px;
+            margin-bottom: 10px;
+            width: 250px;
+            text-align: center;
+        }
+
+        .status-bar {
+            font-size: 0.7rem;
+            color: #444;
+            margin-top: 50px;
         }
     </style>
 </head>
 <body>
 
-    <div class="glitch">ERROR_LIZA_NOT_FOUND</div>
-    
-    <svg class="unknown-pleasures" viewBox="0 0 100 40">
-        <path d="M10 20 Q 25 10, 40 20 T 70 20 T 90 20" fill="none" stroke="black" stroke-width="0.5" />
-        <path d="M10 25 Q 25 15, 40 25 T 70 25 T 90 25" fill="none" stroke="black" stroke-width="0.5" />
-        </svg>
+<div class="lyrics-bg" id="bg-text"></div>
 
-    <div class="content-block" id="test-section">
-        <h3>ВНИМАНИЕ: Проверка на туберкулёзика</h3>
-        <p>Для доступа к протоколу введите секретный код (подсказка: что мы нашли в гаражах?):</p>
-        <input type="text" id="answer" placeholder="...">
-        <button class="btn" onclick="checkAnswer()">ВОЙТИ</button>
+<div class="container">
+    <div id="screen-auth">
+        <div class="header-glitch">LIZA_SYSTEM_v.14</div>
+        <p>КЛИКУХА ГАРАЖНОЙ КОРОЛЕВЫ:</p>
+        <input type="text" id="pass-input" placeholder="Введите пароль...">
+        <br>
+        <button class="btn" onclick="startSystem()">ДЕШИФРОВАТЬ</button>
     </div>
 
-    <div class="content-block" style="display:none;" id="main-content">
-        <h2>Диагноз: Хроническая Любовь к Балтике 9</h2>
-        <p><strong>Пациент:</strong> Лиза (Армянская диктатура)</p>
-        <p><strong>Анамнез:</strong> Слушает Kraftwerk, лечит людей, шутит так, что ФСБ плачет.</p>
-        
-        <div class="medical-report">
-            <p>> Статус Адика: Чёрный властелин (Адольф одобрил).</p>
-            <p>> Состояние Люси: Гаражная королева.</p>
-            <p>> Пипа: Вне зоны критики.</p>
-            <p>> Сид Барретт: Жив, пока мы его слушаем.</p>
+    <div id="screen-menu" class="hidden">
+        <div class="header-glitch">MAIN_MENU</div>
+        <p>Выберите объект для инспекции:</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <button class="btn" onclick="showSection('adik')">Адик</button>
+            <button class="btn" onclick="showSection('lusya')">Люся</button>
+            <button class="btn" onclick="showSection('me')">Твой Унтерменш</button>
+            <button class="btn" onclick="showSection('pipa')">Пипа</button>
         </div>
-
-        <h3 style="margin-top:30px;">Грузинский тост за 0 рублей:</h3>
-        <p>"Даже если мир превратится в зомби-хоррор категории Б, я буду тем чуваком, который прикроет тебя своей Балтикой."</p>
-        
-        <p style="font-style: italic; color: #666;">Я с тобой до последнего, во что бы то ни стало. Ты со мной?</p>
-        
-        <div style="margin-top: 20px;">
-            <button class="btn" onclick="alert('Протокол принят. Отступать некуда.')">ДА</button>
+        <div style="margin-top: 40px; border-top: 1px solid var(--gray); padding-top: 20px;">
+            <p>"Я с тобой до последнего, во что бы то ни стало."</p>
+            <button class="btn" onclick="alert('Lovely Times confirmed.')">ЗД (ДА)</button>
         </div>
     </div>
 
-    <script>
-        function checkAnswer() {
-            const ans = document.getElementById('answer').value.toLowerCase();
-            if(ans.includes('люся') || ans.includes('люсю')) {
-                document.getElementById('test-section').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-            } else {
-                alert('Неверно. Попробуй еще раз, рыгатик.');
-            }
+    <div id="screen-view" class="hidden">
+        <div class="header-glitch" id="view-title">ОБЪЕКТ</div>
+        
+        <div class="medical-frame">
+            <img id="view-img" src="" class="photo-placeholder" alt="Фото еще не загружено">
+            <p id="view-desc" style="font-style: italic;"></p>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="btn" onclick="nav('back')">Назад</button>
+            <button class="btn" onclick="showSection('menu')">Меню</button>
+            <button class="btn" onclick="nav('next')">Вперед</button>
+        </div>
+    </div>
+
+    <div class="status-bar">
+        SENT: 14/02 | STATUS: LOVELY_TIMES | JANITOR_OF_LUNACY_ACTIVE
+    </div>
+</div>
+
+<audio id="bg-music" loop>
+    <source src="https://www.mboxdrive.com/lovely_times.mp3" type="audio/mpeg">
+    </audio>
+
+<script>
+    const sections = ['adik', 'lusya', 'me', 'pipa'];
+    let currentIdx = 0;
+
+    const content = {
+        adik: { title: 'АДИК', desc: 'Чёрный диктатор. Планирует захват власти.', img: 'adik.jpg' },
+        lusya: { title: 'ЛЮСЯ', desc: 'Гаражная королева. Найдена в бетоне, живет в сердце.', img: 'lusya.jpg' },
+        me: { title: 'ТВОЙ УНТЕРМЕНШ', desc: 'Всегда по правую руку от армянской империи.', img: 'me.jpg' },
+        pipa: { title: 'ПИПА', desc: 'Чихуахуа. Маленькая ярость. Родительский фаворит.', img: 'pipa.jpg' }
+    };
+
+    // Генерация фона
+    const lyrics = "Words are very unnecessary... They can only do harm... Reach out and touch faith... I feel you, your sun it shines... Come here (touch me), kiss me (touch me) now... Everything counts in large amounts... Never let me down again... Lovely times... Lovely times... ";
+    document.getElementById('bg-text').innerText = lyrics.repeat(50);
+
+    function startSystem() {
+        const pass = document.getElementById('pass-input').value.toLowerCase();
+        if(pass.includes('люся')) {
+            document.getElementById('screen-auth').classList.add('hidden');
+            document.getElementById('screen-menu').classList.remove('hidden');
+            document.getElementById('bg-music').play();
+        } else {
+            alert('Доступ запрещен. Попробуй еще раз, рыгатик.');
         }
-    </script>
+    }
+
+    function showSection(name) {
+        if(name === 'menu') {
+            document.getElementById('screen-view').classList.add('hidden');
+            document.getElementById('screen-menu').classList.remove('hidden');
+            return;
+        }
+        currentIdx = sections.indexOf(name);
+        updateView();
+        document.getElementById('screen-menu').classList.add('hidden');
+        document.getElementById('screen-view').classList.remove('hidden');
+    }
+
+    function updateView() {
+        const key = sections[currentIdx];
+        document.getElementById('view-title').innerText = content[key].title;
+        document.getElementById('view-desc').innerText = content[key].desc;
+        document.getElementById('view-img').src = content[key].img;
+    }
+
+    function nav(dir) {
+        if(dir === 'next') currentIdx = (currentIdx + 1) % sections.length;
+        else currentIdx = (currentIdx - 1 + sections.length) % sections.length;
+        updateView();
+    }
+</script>
+
 </body>
 </html>
