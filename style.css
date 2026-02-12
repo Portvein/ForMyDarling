@@ -1,0 +1,80 @@
+:root {
+    --bg: #050505;
+    --accent: #800020; 
+    --text: #d1d1d1;
+    --gray: #1a1a1a;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Фоновый текст из DM */
+body::before {
+    content: "WORDS ARE VERY UNNECESSARY... REACH OUT AND TOUCH FAITH... ENJOY THE SILENCE... COME HERE TOUCH ME KISS ME... LOVELY TIMES... ";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.02);
+    padding: 10px;
+    word-break: break-all;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+.container {
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+    border: 1px solid var(--gray);
+    padding: 30px;
+    background: rgba(0,0,0,0.9);
+    position: relative;
+}
+
+.header {
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin-bottom: 20px;
+    letter-spacing: 4px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    text-decoration: none;
+    margin: 5px;
+    background: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s;
+    font-size: 0.8rem;
+}
+
+.btn:hover {
+    background: var(--accent);
+    color: white;
+}
+
+.photo-frame {
+    border: 1px solid var(--gray);
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+img {
+    max-width: 100%;
+    filter: grayscale(1) contrast(1.2);
+}
