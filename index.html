@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>TERMINAL_LIZA_14</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 20px;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .glitch {
+            font-size: 3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            position: relative;
+            text-shadow: 0.05em 0 0 rgba(255,0,0,.75), -0.025em -0.05em 0 rgba(0,255,0,.75), 0.025em 0.05em 0 rgba(0,0,255,.75);
+            animation: glitch 500ms infinite;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-3px, 3px) }
+            40% { transform: translate(-3px, -3px) }
+            60% { transform: translate(3px, 3px) }
+            80% { transform: translate(3px, -3px) }
+            100% { transform: translate(0) }
+        }
+        .unknown-pleasures {
+            margin: 40px 0;
+            width: 300px;
+            opacity: 0.8;
+            filter: invert(1);
+        }
+        .content-block {
+            max-width: 600px;
+            border-left: 2px solid #800020; /* Бордовый акцент */
+            padding-left: 20px;
+            margin-bottom: 50px;
+        }
+        .medical-report {
+            background: #111;
+            padding: 20px;
+            border: 1px solid #333;
+            font-size: 0.9rem;
+        }
+        .btn {
+            background: transparent;
+            color: #800020;
+            border: 1px solid #800020;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #800020;
+            color: white;
+        }
+        input {
+            background: #000;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glitch">ERROR_LIZA_NOT_FOUND</div>
+    
+    <svg class="unknown-pleasures" viewBox="0 0 100 40">
+        <path d="M10 20 Q 25 10, 40 20 T 70 20 T 90 20" fill="none" stroke="black" stroke-width="0.5" />
+        <path d="M10 25 Q 25 15, 40 25 T 70 25 T 90 25" fill="none" stroke="black" stroke-width="0.5" />
+        </svg>
+
+    <div class="content-block" id="test-section">
+        <h3>ВНИМАНИЕ: Проверка на туберкулёзика</h3>
+        <p>Для доступа к протоколу введите секретный код (подсказка: что мы нашли в гаражах?):</p>
+        <input type="text" id="answer" placeholder="...">
+        <button class="btn" onclick="checkAnswer()">ВОЙТИ</button>
+    </div>
+
+    <div class="content-block" style="display:none;" id="main-content">
+        <h2>Диагноз: Хроническая Любовь к Балтике 9</h2>
+        <p><strong>Пациент:</strong> Лиза (Армянская диктатура)</p>
+        <p><strong>Анамнез:</strong> Слушает Kraftwerk, лечит людей, шутит так, что ФСБ плачет.</p>
+        
+        <div class="medical-report">
+            <p>> Статус Адика: Чёрный властелин (Адольф одобрил).</p>
+            <p>> Состояние Люси: Гаражная королева.</p>
+            <p>> Пипа: Вне зоны критики.</p>
+            <p>> Сид Барретт: Жив, пока мы его слушаем.</p>
+        </div>
+
+        <h3 style="margin-top:30px;">Грузинский тост за 0 рублей:</h3>
+        <p>"Даже если мир превратится в зомби-хоррор категории Б, я буду тем чуваком, который прикроет тебя своей Балтикой."</p>
+        
+        <p style="font-style: italic; color: #666;">Я с тобой до последнего, во что бы то ни стало. Ты со мной?</p>
+        
+        <div style="margin-top: 20px;">
+            <button class="btn" onclick="alert('Протокол принят. Отступать некуда.')">ДА</button>
+        </div>
+    </div>
+
+    <script>
+        function checkAnswer() {
+            const ans = document.getElementById('answer').value.toLowerCase();
+            if(ans.includes('люся') || ans.includes('люсю')) {
+                document.getElementById('test-section').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+            } else {
+                alert('Неверно. Попробуй еще раз, рыгатик.');
+            }
+        }
+    </script>
+</body>
+</html>
