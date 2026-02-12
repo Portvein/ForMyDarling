@@ -8,7 +8,7 @@ function initMusic() {
         
         // Определяем путь к музыке (если мы в папке objects, нужно выйти на уровень выше)
         const isSubDir = window.location.pathname.includes('/objects/');
-        audio.src = isSubDir ? '../lovely_times.mp3' : 'lovely_times.mp3';
+        audio.src = isSubDir ? 'Janitor_Of_Lunacy_Lovely_Times.mp3' : 'lovely_times.mp3';
         
         document.body.appendChild(audio);
 
